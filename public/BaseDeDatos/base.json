@@ -1,0 +1,73 @@
+{
+	"materias": [
+		{
+			"id": 1,
+			"nombre": "Proyecto de Implementación de sitios web dinámico (PISWD)",
+			"logo": "src/Imagenes/piswd.jpg",
+			"descripcion": "Desarrollo de sitios web dinámicos utilizando tecnologías modernas.",
+			"contenidos": "HTML, CSS, JavaScript, React"
+		},
+		{
+			"id": 2,
+			"nombre": "Organización y Métodos",
+			"logo": "src/Imagenes/organizacion.jpg",
+			"descripcion": "Estudio de técnicas para mejorar la eficiencia organizacional.",
+			"contenidos": "Organigramas, Procedimientos, Métodos de trabajo"
+		},
+		{
+			"id": 3,
+			"nombre": "Sistemas Computacionales",
+			"logo": "src/Imagenes/sistemas.jpg",
+			"descripcion": "Análisis y diseño de sistemas de información.",
+			"contenidos": "Arquitectura, Hardware, Software"
+		},
+		{
+			"id": 4,
+			"nombre": "Aplicaciones Móviles",
+			"logo": "src/Imagenes/moviles.jpg",
+			"descripcion": "Diseño y desarrollo de apps móviles para diferentes plataformas.",
+			"contenidos": "Android, iOS, React Native"
+		},
+		{
+			"id": 5,
+			"nombre": "Evaluación de Proyecto",
+			"logo": "src/Imagenes/evaluacion.jpg",
+			"descripcion": "Técnicas y herramientas para valorar proyectos tecnológicos.",
+			"contenidos": "Costo-beneficio, ROI, Análisis de riesgos"
+		},
+		{
+			"id": 6,
+			"nombre": "Modelos y Sistemas",
+			"logo": "src/Imagenes/modelos.jpg",
+			"descripcion": "Modelación y simulación de sistemas organizacionales.",
+			"contenidos": "Modelado, UML, BPMN"
+		},
+		{
+			"id": 7,
+			"nombre": "Proyecto",
+			"logo": "src/Imagenes/proyecto.jpg",
+			"descripcion": "Desarrollo integral de un proyecto tecnológico final.",
+			"contenidos": "Planificación, Desarrollo, Presentación"
+		}
+	],
+	"usuarios": [
+		{
+			"id": 1,
+			"nombre": "Juan Pérez",
+			"email": "juan.perez@example.com",
+			"rol": "Estudiante"
+		},
+		{
+			"id": 2,
+			"nombre": "María Gómez",
+			"email": "maria.gomez@example.com",
+			"rol": "Docente"
+		},
+		{
+			"id": 3,
+			"nombre": "Carlos Ruiz",
+			"email": "carlos.ruiz@example.com",
+			"rol": "Estudiante"
+		}
+	]
+}
