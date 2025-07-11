@@ -1,4 +1,3 @@
-// src/Paginas/ModificarMateria.jsx
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -15,7 +14,7 @@ const guardarMaterias = (materias) => {
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(materias));
 };
 
-export default function ModificarMateria({ id }) {
+export default function ModificarMateria({ id, onCancelar, onModificado }) {
 	const [materiaInicial, setMateriaInicial] = useState(null);
 
 	useEffect(() => {
@@ -25,11 +24,12 @@ export default function ModificarMateria({ id }) {
 			setMateriaInicial(materia);
 		} else {
 			alert("Materia no encontrada");
+			onCancelar();
 		}
-	}, [id]);
+	}, [id, onCancelar]);
 
 	const formik = useFormik({
-		enableReinitialize: true, // importante para que el form se actualice cuando materiaInicial cambie
+		enableReinitialize: true,
 		initialValues: {
 			nombre: materiaInicial?.nombre || "",
 			logo: materiaInicial?.logo || "",
@@ -51,6 +51,7 @@ export default function ModificarMateria({ id }) {
 				materias[index] = { id: Number(id), ...values };
 				guardarMaterias(materias);
 				alert("Materia modificada correctamente");
+				onModificado();
 			} else {
 				alert("Error: Materia no encontrada");
 			}
@@ -141,6 +142,12 @@ export default function ModificarMateria({ id }) {
 							onClick={formik.handleReset}
 							className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded">
 							Limpiar
+						</button>
+						<button
+							type="button"
+							onClick={onCancelar}
+							className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded">
+							Cancelar
 						</button>
 					</div>
 				</form>

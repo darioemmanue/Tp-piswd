@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { GrDocumentConfig } from "react-icons/gr";
 import { FiUser } from "react-icons/fi";
+import { GrDocumentConfig } from "react-icons/gr";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
+import { obtenerUsuario, guardarUsuario } from "../scripts/materias.js";
 
 const Layout = ({ children }) => {
 	const [collapsed, setCollapsed] = useState(false);
 	const sidebarRef = useRef(null);
 
-	// Cerrar al hacer clic fuera
+	const [usuario, setUsuario] = useState(null); // null mientras carga
+
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -17,10 +20,51 @@ const Layout = ({ children }) => {
 			}
 		};
 		document.addEventListener("mousedown", handleClickOutside);
+
+		async function cargarUsuario() {
+			let user = obtenerUsuario();
+			if (!user) {
+				// Si no hay en localStorage, traemos de archivo
+				try {
+					const res = await fetch("/BaseDeDatos/base.json");
+					if (!res.ok) throw new Error("Error cargando base.json");
+					const data = await res.json();
+					const usuario1 = data.usuarios.find((u) => u.id === 1);
+					if (usuario1) {
+						guardarUsuario(usuario1);
+						setUsuario(usuario1);
+						return;
+					}
+				} catch (e) {
+					console.error(e);
+				}
+				setUsuario({ nombre: "Invitado", rol: "" });
+			} else {
+				setUsuario(user);
+			}
+		}
+
+		cargarUsuario();
+
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
 	}, []);
+
+	const menuItems = [
+		{ path: "/", label: "Materias" },
+		{ path: "/materias", label: "Listado de Materias" },
+		{ path: "/addMat", label: "Nueva Materia" },
+	];
+
+	if (!usuario) {
+		// Mientras carga usuario
+		return (
+			<div className="flex min-h-screen justify-center items-center text-white bg-black">
+				Cargando usuario...
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex min-h-screen">
@@ -31,17 +75,18 @@ const Layout = ({ children }) => {
 					initial={{ width: collapsed ? 80 : 256 }}
 					animate={{ width: collapsed ? 80 : 256 }}
 					exit={{ width: 0, opacity: 0 }}
-					transition={{ duration: 0.3, ease: "easeInOut" }}
+					transition={{ duration: 0.3 }}
 					className="bg-gradient-to-b from-red-700 to-red-500 text-white p-4 shadow-lg relative z-10 overflow-hidden">
 					{/* Botón toggle */}
 					<button
 						onClick={() => setCollapsed(!collapsed)}
 						className="text-white mb-6 focus:outline-none hover:text-gray-200 transition"
+						aria-label="Expandir o contraer menú"
 						title="Expandir / Contraer">
 						<FaBars size={20} />
 					</button>
 
-					{/* Usuario */}
+					{/* Sección de Usuario */}
 					<div className="flex items-center gap-2 mb-8 cursor-default">
 						<FiUser size={24} />
 						<motion.div
@@ -51,12 +96,12 @@ const Layout = ({ children }) => {
 							className={`${
 								collapsed ? "hidden" : "flex"
 							} flex-col leading-tight`}>
-							<span className="font-semibold text-md">Usuario</span>
-							<span className="text-sm text-white/80">Admin</span>
+							<span className="font-semibold text-md">{usuario.nombre}</span>
+							<span className="text-sm text-white/80">{usuario.rol}</span>
 						</motion.div>
 					</div>
 
-					{/* Operaciones */}
+					{/* Menú de navegación */}
 					<div>
 						<div className="flex items-center gap-2 mb-4 cursor-default">
 							<GrDocumentConfig size={22} />
@@ -72,11 +117,7 @@ const Layout = ({ children }) => {
 						</div>
 
 						<ul className="ml-1 space-y-3 text-sm">
-							{[
-								{ path: "/materias", label: "Materias" },
-								{ path: "/addMat", label: "Alta de Materia" },
-								{ path: "/modMat", label: "Modificación de Materia" },
-							].map(({ path, label }, idx) => (
+							{menuItems.map(({ path, label }, idx) => (
 								<li key={idx}>
 									<Link
 										to={path}
@@ -97,7 +138,8 @@ const Layout = ({ children }) => {
 				</motion.aside>
 			</AnimatePresence>
 
-			<main className="flex-1 bg-gradient-to-r from-black  to-gray-800 p-8 overflow-y-auto">
+			{/* Contenido principal */}
+			<main className="flex-1 bg-gradient-to-r from-black to-gray-800 p-8 overflow-y-auto text-white">
 				{children}
 			</main>
 		</div>
