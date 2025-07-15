@@ -13,12 +13,8 @@ export default function Home() {
 	useEffect(() => {
 		fetch("/api/materias")
 			.then((res) => res.json())
-			.then((data) => {
-				setMaterias(data.materias || []);
-			})
-			.catch((error) => {
-				console.error("Error al cargar materias:", error);
-			});
+			.then((data) => setMaterias(data.materias || []))
+			.catch((error) => console.error("Error al cargar materias:", error));
 	}, []);
 
 	const cargarArchivos = async (idSeleccionado) => {
@@ -26,11 +22,9 @@ export default function Home() {
 			const res = await fetch("/api/archivos");
 			if (!res.ok) throw new Error("Error al obtener archivos");
 			const data = await res.json();
-			const archivosArray = Array.isArray(data) ? data : [];
-
-			const filtrados = archivosArray.filter(
-				(a) => a.materiaId === idSeleccionado
-			);
+			const filtrados = Array.isArray(data)
+				? data.filter((a) => a.materiaId === idSeleccionado)
+				: [];
 			setArchivos(filtrados);
 		} catch (error) {
 			console.error("Error al obtener archivos:", error);
@@ -80,6 +74,21 @@ export default function Home() {
 			console.error("Error en la subida:", error);
 			alert("Falló la subida");
 		}
+	};
+
+	const renderArchivoPorTipo = (tipoBuscado) => {
+		const archivo = archivos.find((a) => a.tipo === tipoBuscado);
+		if (!archivo) return "-";
+
+		return (
+			<a
+				href={`/Archivos/${archivo.nombreReal}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				className="text-blue-600 hover:underline">
+				{archivo.nombre}
+			</a>
+		);
 	};
 
 	return (
@@ -184,32 +193,44 @@ export default function Home() {
 						<hr className="my-8 border-t-4 border-double border-gray-300" />
 
 						<div className="overflow-auto">
-							<table className="w-full border text-sm text-center border-collapse border-gray-300">
-								<thead className="bg-[#722323] font-bold text-white">
-									<tr>
-										<th className="border p-2">Nombre</th>
-										<th className="border p-2">Tipo</th>
-										<th className="border p-2">Ver</th>
-									</tr>
-								</thead>
-								<tbody>
-									{archivos.map((a, idx) => (
-										<tr key={idx}>
-											<td className="border p-2">{a.nombre}</td>
-											<td className="border p-2">{a.tipo}</td>
-											<td className="border p-2">
-												<a
-													href={`/Archivos/${a.nombreReal}`}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="text-blue-500 underline">
-													Abrir
-												</a>
+							<div className="bg-white rounded-xl border border-black w-full max-w-5xl mx-auto overflow-x-auto shadow-sm">
+								<table className="w-full table-auto text-sm text-center text-black border-collapse">
+									<thead className="bg-white text-black font-bold">
+										<tr>
+											<th className="border border-black px-4 py-2">
+												PROGRAMA
+											</th>
+											<th className="border border-black px-4 py-2">TEORÍA</th>
+											<th className="border border-black px-4 py-2">
+												TRABAJOS PRÁCTICOS
+											</th>
+											<th className="border border-black px-4 py-2">NOTAS</th>
+											<th className="border border-black px-4 py-2">
+												ENLACES RELACIONADOS
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td className="border border-black px-4 py-2">
+												{renderArchivoPorTipo("PROGRAMA")}
+											</td>
+											<td className="border border-black px-4 py-2">
+												{renderArchivoPorTipo("TEORIA")}
+											</td>
+											<td className="border border-black px-4 py-2">
+												{renderArchivoPorTipo("TRABAJO PRÁCTICO")}
+											</td>
+											<td className="border border-black px-4 py-2">
+												{renderArchivoPorTipo("NOTAS")}
+											</td>
+											<td className="border border-black px-4 py-2">
+												{renderArchivoPorTipo("ENLACE")}
 											</td>
 										</tr>
-									))}
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				)}

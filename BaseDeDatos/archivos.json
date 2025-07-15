@@ -1,16 +1,34 @@
 [
-	{
-		"id": 1,
-		"nombre": "tema1",
-		"nombreReal": "tema1.pdf",
-		"tipo": "PROGRAMA",
-		"materiaId": 3
-	},
-	{
-		"id": 2,
-		"nombre": "tema2",
-		"nombreReal": "tema2.pdf",
-		"tipo": "TEORIA",
-		"materiaId": 5
-	}
+  {
+    "id": 1,
+    "nombre": "tema1",
+    "nombreReal": "tema1.pdf",
+    "tipo": "PROGRAMA",
+    "materiaId": 3
+  },
+  {
+    "id": 2,
+    "nombre": "tema2",
+    "nombreReal": "tema2.pdf",
+    "tipo": "TEORIA",
+    "materiaId": 5
+  },
+  {
+    "nombre": "asdasd",
+    "tipo": "NOTAS",
+    "nombreReal": "1752607936873-CV_Dario_Alderete_Compacto.pdf",
+    "materiaId": 1
+  },
+  {
+    "nombre": "asdasd",
+    "tipo": "TRABAJO PRÁCTICO",
+    "nombreReal": "1752608129624-CV_Dario_Emmanuel_Alderete.pdf",
+    "materiaId": 1
+  },
+  {
+    "nombre": "bbb",
+    "tipo": "PROGRAMA",
+    "nombreReal": "1752608249486-Evaluacion_VAN_TIR_Stock.xlsx",
+    "materiaId": 1
+  }
 ]
