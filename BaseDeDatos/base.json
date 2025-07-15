@@ -1,0 +1,99 @@
+{
+	"materias": [
+		{
+			"id": 1,
+			"nombre": "Matemáticas",
+			"logo": "math.svg",
+			"descripcion": "Fundamentos matemáticos para la ciencia y tecnología.",
+			"contenidos": "Álgebra, Geometría, Cálculo",
+			"anio": 6,
+			"division": 1
+		},
+		{
+			"id": 2,
+			"nombre": "Organización",
+			"logo": "file.svg",
+			"descripcion": "Estudio de técnicas para mejorar la eficiencia organizacional.",
+			"contenidos": "Organigramas, Procedimientos, Métodos de trabajo",
+			"anio": 7,
+			"division": 4
+		},
+		{
+			"id": 3,
+			"nombre": "Sistemas Computacionales",
+			"logo": "/globe.svg",
+			"descripcion": "Análisis y diseño de sistemas de información.",
+			"contenidos": "Arquitectura, Hardware, Software",
+			"anio": 7,
+			"division": 4
+		},
+		{
+			"id": 4,
+			"nombre": "Aplicaciones Móviles",
+			"logo": "src/Imagenes/moviles.jpg",
+			"descripcion": "Diseño y desarrollo de apps móviles para diferentes plataformas.",
+			"contenidos": "Android, iOS, React Native",
+			"anio": 7,
+			"division": 4
+		},
+		{
+			"id": 5,
+			"nombre": "Evaluación de Proyecto",
+			"logo": "src/Imagenes/evaluacion.jpg",
+			"descripcion": "Técnicas y herramientas para valorar proyectos tecnológicos.",
+			"contenidos": "Costo-beneficio, ROI, Análisis de riesgos",
+			"anio": 8,
+			"division": 2
+		},
+		{
+			"id": 6,
+			"nombre": "Modelos y Sistemas",
+			"logo": "src/Imagenes/modelos.jpg",
+			"descripcion": "Modelación y simulación de sistemas organizacionales.",
+			"contenidos": "Modelado, UML, BPMN",
+			"anio": 8,
+			"division": 3
+		},
+		{
+			"id": 7,
+			"nombre": "Redes y Comunicaciones",
+			"logo": "src/Imagenes/redes.jpg",
+			"descripcion": "Fundamentos de redes de computadoras y telecomunicaciones.",
+			"contenidos": "Protocolos, TCP/IP, Seguridad",
+			"anio": 8,
+			"division": 1
+		},
+		{
+			"id": 8,
+			"nombre": "Bases de Datos",
+			"logo": "src/Imagenes/basedatos.jpg",
+			"descripcion": "Diseño, implementación y gestión de bases de datos.",
+			"contenidos": "SQL, NoSQL, Modelado de datos",
+			"anio": 7,
+			"division": 3
+		},
+		{
+			"id": 9,
+			"nombre": "Inteligencia Artificial",
+			"logo": "src/Imagenes/ia.jpg",
+			"descripcion": "Introducción a técnicas y aplicaciones de IA.",
+			"contenidos": "Machine Learning, Redes Neuronales, NLP",
+			"anio": 9,
+			"division": 2
+		}
+	],
+	"usuarios": [
+		{
+			"id": 1,
+			"nombre": "Juan Pérez",
+			"email": "juan.perez@example.com",
+			"rol": "Docente"
+		},
+		{
+			"id": 2,
+			"nombre": "María Gómez",
+			"email": "maria.gomez@example.com",
+			"rol": "Estudiante"
+		}
+	]
+}
